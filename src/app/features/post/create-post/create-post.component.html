@@ -5,11 +5,27 @@
             <label for="title" class="w-full">Title</label>
             <input type="text" class="bg-neutral-100 w-full px-4 py-2 mt-2" name="title" id="title"
                 placeholder="Enter a title for your post" autocomplete="off" formControlName="title" />
-        </div>
-        <div class="mt-4">
+
+            <p *ngIf="createPostForm.get('title')?.errors?.['required'] && (createPostForm.get('title')?.dirty || createPostForm.get('title')?.touched)"
+                class="text-red-700 text-sm mt-1">Title is required</p>
+
+            <p *ngIf="createPostForm.get('title')?.errors?.['minlength']" class="text-red-700 text-sm mt-1">Title must
+                be at least 6 characters</p>
+
+            <p *ngIf="createPostForm.get('title')?.errors?.['maxlength']" class="text-red-700 text-sm mt-1">Title must
+                not exceed 100 characters</p>
+
             <label for="content" class="w-full">Content</label>
             <textarea class="bg-neutral-100 w-full px-4 py-2 mt-2 h-[200px]" name="content" id="content"
                 placeholder="Post content" formControlName="content"></textarea>
+
+            <p *ngIf="createPostForm.get('content')?.errors?.['required'] && (createPostForm.get('content')?.dirty || createPostForm.get('content')?.touched)"
+                class="text-red-700 text-sm mt-1">Content is required</p>
+
+            <p *ngIf="createPostForm.get('content')?.errors?.['maxlength']" class="text-red-700 text-sm mt-1">Content
+                must
+                not exceed 1000 characters</p>
+
         </div>
         <div class="mt-4">
             <button type="submit" class="bg-indigo-500 text-white px-4 py-2 rounded">Publish
